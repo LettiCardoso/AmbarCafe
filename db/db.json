@@ -129,6 +129,21 @@
       "foto": "https://media.istockphoto.com/id/2270395474/pt/foto/close-up-photo-of-lemon-cheesecake-with-berry-coulis-and-basil-garnish.webp?a=1&b=1&s=612x612&w=0&k=20&c=KRtFOYSKDJousWA70180l5KuQTOaG2K2MiVFui7YZ8g="
     }
   ],
-  "pedidos": [],
+  "pedidos": [
+    {
+      "nome_cliente": "Miguelito",
+      "nome_cafe": "Croissant de Amêndoas",
+      "foto_cafe": "https://images.unsplash.com/photo-1555507036-ab1f4038808a?q=80&w=600&auto=format&fit=crop",
+      "categoria": "lanches",
+      "tamanho": "Padrão (Porção Individual)",
+      "tipo_leite": "Não se aplica",
+      "opcionais": [],
+      "valor_total": "21,00",
+      "status": "Em preparação",
+      "ponto": "Padrão",
+      "data_pedido": "2026-06-25T02:32:29.361Z",
+      "id": 5
+    }
+  ],
   "$schema": "./node_modules/json-server/schema.json"
 }

@@ -192,7 +192,7 @@ export default {
     async buscarPedidos() {
       this.carregando = true;
       try {
-        const response = await fetch("http://localhost:3000/pedidos");
+        const response = await fetch("https://api-ambarcafe.onrender.com/pedidos");
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         this.listaPedidos = await response.json();
       } catch (error) {
@@ -221,7 +221,7 @@ export default {
       const id = this.modal.idItem;
       this.removendo = true;
       try {
-        const response = await fetch(`http://localhost:3000/pedidos/${id}`, {
+        const response = await fetch(`https://api-ambarcafe.onrender.com/pedidos/${id}`, {
           method: "DELETE"
         });
 

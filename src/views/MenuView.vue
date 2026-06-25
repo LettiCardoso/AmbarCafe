@@ -102,7 +102,7 @@ export default {
       this.carregando = true;
       this.erroApi = false;
       try {
-        const response = await fetch("http://localhost:3000/menu");
+        const response = await fetch("https://api-ambarcafe.onrender.com/menu");
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         const dados = await response.json();
         this.listaMenuCafeteria = Array.isArray(dados) ? dados : [];
