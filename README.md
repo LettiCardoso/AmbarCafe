@@ -55,6 +55,26 @@ valorTotal() {
 
 ### *Falha de Rede (Catch):*
 *Captura a quebra e exibe um alerta de aviso informando a impossibilidade de contato com o JSON Server.*
+## 🔗 Estrutura de Arquivos da Aplicação
+
+A arquitetura do projeto segue o padrão modular do ecossistema Vue, separando os componentes reutilizáveis das visões estruturais de página:
+
+```text
+🔗 Estrutura do Projeto
+└── src/
+    ├── components/
+    │   ├── AlertaComponent.vue         # Alertas semânticos reutilizáveis (sucesso, erro, aviso)
+    │   ├── BannerComponent.vue         # Banner principal da home page com identidade visual
+    │   ├── NavBarComponent.vue         # Barra de navegação responsiva com a marca Âmbar Café
+    │   └── ListagemPedidosComponent.vue # Componente para renderizar a tabela/cards de pedidos ativos
+    ├── views/
+    │   ├── HomeView.vue                # Página introdutória da cafeteria gourmet
+    │   ├── MenuView.vue                # Cardápio completo de cafés, lanches e doces
+    │   ├── ConfiguracaoPedidoView.vue  # Tela de customização, opcionais e cálculo dinâmico do total
+    │   └── PedidosView.vue             # Tela de acompanhamento e monitoramento de pedidos em tempo real
+    ├── router/
+    │   └── index.js                    # Configuração de rotas de navegação do Vue Router
+```
 
 ## 🔗*Links e Ecossistema do Projeto*
 *Para garantir total transparência no processo de avaliação, abaixo estão listados os endereços ativos de produção e código-fonte:*
