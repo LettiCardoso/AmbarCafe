@@ -174,12 +174,12 @@ computed: {
       if (this.produto.categoria === "bebidas") {
         return [
           { value: "p", label: "Pequeno", desc: "200ml" },
-          { value: "m", label: "MÃ©dio",   desc: "350ml" },
+          { value: "m", label: "Medio",   desc: "350ml" },
           { value: "g", label: "Grande",  desc: "500ml" }
         ];
       } else {
         return [
-          { value: "p", label: "PadrÃ£o", desc: "PorÃ§Ã£o Individual" },
+          { value: "p", label: "Padrao", desc: "Padrao Individual" },
           { value: "g", label: "Grande",  desc: "Combo / Para dividir" }
         ];
       }
