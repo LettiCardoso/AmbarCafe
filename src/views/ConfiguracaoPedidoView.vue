@@ -16,8 +16,8 @@
           <h2 class="product-title">{{ produto.nome || 'Café Especial' }}</h2>
           <p class="product-description-text">{{ produto.descricao || 'Prepare uma experiência única.' }}</p>
           <div class="price-row">
-            <span class="price-label">Valor base</span>
-            <span class="price-value">R$ {{ produto.valor || '—' }}</span>
+            <span class="price-label">Valor total</span>
+            <span class="price-value">R$ {{ valorTotal }}</span>
           </div>
         </div>
       </aside>
@@ -168,22 +168,48 @@ export default {
       ]
     };
   },
-
-  computed: {
+computed: {
     // Retorna os tamanhos dinamicamente de acordo com a categoria do produto
     opcoesTamanho() {
       if (this.produto.categoria === "bebidas") {
         return [
           { value: "p", label: "Pequeno", desc: "200ml" },
-          { value: "m", label: "Médio",   desc: "350ml" },
+          { value: "m", label: "MÃ©dio",   desc: "350ml" },
           { value: "g", label: "Grande",  desc: "500ml" }
         ];
       } else {
         return [
-          { value: "p", label: "Padrão", desc: "Porção Individual" },
+          { value: "p", label: "PadrÃ£o", desc: "PorÃ§Ã£o Individual" },
           { value: "g", label: "Grande",  desc: "Combo / Para dividir" }
         ];
       }
+    },
+
+    // CALCULA O VALOR TOTAL DINAMICAMENTE
+    valorTotal() {
+      // Começa com o valor base do produto (convertendo texto "18,50" para número 18.50)
+      let total = 0;
+      if (this.produto.valor) {
+        total = parseFloat(this.produto.valor.replace(",", "."));
+      }
+
+      // Se for bebida e tiver leite especial selecionado, soma o extra do leite
+      if (this.produto.categoria === "bebidas" && this.leiteSelecionado) {
+        const leiteObj = this.opcoesLeite.find(o => o.value === this.leiteSelecionado);
+        if (leiteObj && leiteObj.value === "aveia") total += 4.00;
+        if (leiteObj && leiteObj.value === "amÃªndoas") total += 5.00;
+      }
+
+      // Soma os acompanhamentos ativos
+      this.extrasAtivos.forEach(id => {
+        const extraObj = this.extrasDisponiveis.find(e => e.id === id);
+        if (extraObj && extraObj.preco) {
+          total += parseFloat(extraObj.preco.replace(",", "."));
+        }
+      });
+
+      // Retorna formatado em string com vírgula de volta: "21,50"
+      return total.toFixed(2).replace(".", ",");
     }
   },
 
@@ -233,11 +259,10 @@ export default {
         foto_cafe:     this.produto.foto     || this.imagemFallback,
         categoria:     this.produto.categoria || "bebidas",
         tamanho:       tamanhoTexto ? `${tamanhoTexto.label} (${tamanhoTexto.desc})` : this.tamanhoSelecionado,
-        // Caso não seja bebida, grava como "Não se aplica" no banco de dados
-        tipo_leite:    this.produto.categoria === "bebidas" && leiteTexto ? leiteTexto.label : "Não se aplica",
+        tipo_leite:    this.produto.categoria === "bebidas" && leiteTexto ? leiteTexto.label : "NÃ£o se aplica",
         opcionais:     extrasSelecionados,
-        valor_total:   this.produto.valor    || "0,00",
-        status:        "Em preparação",
+        valor_total:   this.valorTotal, // <-- MUDADO AQUI: Envia o valor somado correto!
+        status:        "Em preparaÃ§Ã£o",
         ponto:         tamanhoTexto ? tamanhoTexto.label : this.tamanhoSelecionado,
         data_pedido:   new Date().toISOString()
       };
